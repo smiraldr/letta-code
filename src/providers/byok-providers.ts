@@ -152,6 +152,21 @@ export const CLOUD_BYOK_PROVIDERS: readonly ByokProvider[] = [
     ],
   },
   {
+    id: "ionet",
+    displayName: "IO Intelligence",
+    description: "Connect an IO Intelligence (io.net) API key",
+    providerType: "openai",
+    providerName: "lc-ionet",
+    fields: [
+      { key: "apiKey", label: "API Key", secret: true },
+      {
+        key: "baseUrl",
+        label: "Base URL",
+        placeholder: "https://api.intelligence.io.solutions/api/v1",
+      },
+    ],
+  },
+  {
     id: "zai",
     displayName: "zAI API",
     description: "Connect a zAI API key",
@@ -246,6 +261,7 @@ const LOCAL_PROVIDER_DISPLAY_NAMES: Record<string, string> = {
   "opencode-go": "OpenCode Go",
   openai: "OpenAI",
   "openai-codex": "ChatGPT Plus/Pro",
+  ionet: "IO Intelligence",
   openrouter: "OpenRouter",
   together: "Together AI",
   "vercel-ai-gateway": "Vercel AI Gateway",
@@ -305,6 +321,23 @@ const LOCAL_EXTRA_PROVIDER_CONFIGS: readonly ByokProvider[] = [
     fields: [
       { key: "apiKey", label: "API Key", secret: true, required: false },
       { key: "baseUrl", label: "Base URL" },
+    ],
+  },
+  {
+    id: "ionet",
+    displayName: "IO Intelligence",
+    description: "Connect an IO Intelligence (io.net) API key",
+    providerType: "ionet",
+    providerName: "ionet",
+    providerNames: ["ionet", "lc-ionet"],
+    fields: [
+      { key: "apiKey", label: "API Key", secret: true },
+      {
+        key: "baseUrl",
+        label: "Base URL",
+        placeholder: "https://api.intelligence.io.solutions/api/v1",
+        required: false,
+      },
     ],
   },
   {

@@ -277,6 +277,73 @@ describe("connect provider service", () => {
     ]);
   });
 
+  test("serializes IO Intelligence fields for both storage targets", () => {
+    const providers: ByokProvider[] = [
+      {
+        id: "ionet",
+        displayName: "IO Intelligence",
+        description: "Connect an IO Intelligence (io.net) API key",
+        providerType: "openai",
+        providerName: "lc-ionet",
+        fields: [
+          { key: "apiKey", label: "API Key", secret: true },
+          {
+            key: "baseUrl",
+            label: "Base URL",
+            placeholder: "https://api.intelligence.io.solutions/api/v1",
+          },
+        ],
+      },
+      {
+        id: "ionet",
+        displayName: "IO Intelligence",
+        description: "Connect an IO Intelligence (io.net) API key",
+        providerType: "ionet",
+        providerName: "ionet",
+        providerNames: ["ionet", "lc-ionet"],
+        fields: [
+          { key: "apiKey", label: "API Key", secret: true },
+          {
+            key: "baseUrl",
+            label: "Base URL",
+            placeholder: "https://api.intelligence.io.solutions/api/v1",
+            required: false,
+          },
+        ],
+      },
+    ];
+
+    const apiEntries = buildConnectProviderEntries(
+      [providers[0]!],
+      new Map(),
+      "api",
+    );
+    expect(apiEntries[0]?.fields).toEqual([
+      { key: "apiKey", label: "API Key", secret: true, required: true },
+      {
+        key: "baseUrl",
+        label: "Base URL",
+        placeholder: "https://api.intelligence.io.solutions/api/v1",
+        required: true,
+      },
+    ]);
+
+    const localEntries = buildConnectProviderEntries(
+      [providers[1]!],
+      new Map(),
+      "local",
+    );
+    expect(localEntries[0]?.fields).toEqual([
+      { key: "apiKey", label: "API Key", secret: true, required: true },
+      {
+        key: "baseUrl",
+        label: "Base URL",
+        placeholder: "https://api.intelligence.io.solutions/api/v1",
+        required: false,
+      },
+    ]);
+  });
+
   test("serializes optional fields as not required", () => {
     const providers: ByokProvider[] = [
       {

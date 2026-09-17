@@ -97,6 +97,29 @@ describe("connect provider normalization", () => {
     expect(isConnectApiKeyProvider(resolved)).toBe(true);
   });
 
+  test("resolves IO Intelligence provider for Letta and local stores", () => {
+    const api = resolveConnectProvider("ionet", "api");
+
+    if (!api) {
+      throw new Error("Expected ionet provider to resolve for api target");
+    }
+    expect(api.canonical).toBe("ionet");
+    expect(api.byokProvider.providerType).toBe("openai");
+    expect(api.byokProvider.providerName).toBe("lc-ionet");
+    expect(isConnectApiKeyProvider(api)).toBe(true);
+
+    const local = resolveConnectProvider("ionet", "local");
+
+    if (!local) {
+      throw new Error("Expected ionet provider to resolve for local target");
+    }
+    expect(local.canonical).toBe("ionet");
+    expect(local.byokProvider.providerType).toBe("ionet");
+    expect(local.byokProvider.providerName).toBe("ionet");
+    expect(local.byokProvider.providerNames).toEqual(["ionet", "lc-ionet"]);
+    expect(isConnectApiKeyProvider(local)).toBe(true);
+  });
+
   test("resolves bedrock as non-api-key provider", () => {
     const bedrock = resolveConnectProvider("bedrock", "api");
     if (!bedrock) {

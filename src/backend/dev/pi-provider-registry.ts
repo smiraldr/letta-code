@@ -19,6 +19,7 @@ export const LOCAL_LMSTUDIO_PROVIDER_NAME = "lc-lmstudio";
 export const LMSTUDIO_OPENAI_PROVIDER_TYPE = "lmstudio_openai";
 export const LEGACY_LMSTUDIO_PROVIDER_TYPE = "lmstudio";
 export const LOCAL_LLAMA_CPP_PROVIDER_NAME = "lc-llama-cpp";
+export const LOCAL_IONET_PROVIDER_NAME = "lc-ionet";
 export const LOCAL_ZAI_PROVIDER_NAME = "lc-zai";
 export const LOCAL_ZAI_CODING_PROVIDER_NAME = "lc-zai-coding";
 export const LOCAL_MINIMAX_PROVIDER_NAME = "lc-minimax";
@@ -32,7 +33,8 @@ export type LocalEndpointProvider =
   | "ollama-cloud"
   | "openai-compatible"
   | "lmstudio"
-  | "llama-cpp";
+  | "llama-cpp"
+  | "ionet";
 
 export type PiProvider = KnownProvider | LocalEndpointProvider;
 
@@ -324,6 +326,17 @@ const LOCAL_ENDPOINT_PROVIDER_SPECS: readonly PiProviderSpec[] = [
       LOCAL_OPENAI_COMPATIBLE_PROVIDER_NAME,
     ],
     fallbackApiKey: "not-needed",
+    localModelDiscovery: "openai-compatible",
+    createCustomModel: true,
+  },
+  {
+    id: "ionet",
+    providerTypes: ["ionet"],
+    handlePrefixes: ["ionet/"],
+    localProviderNames: ["ionet", LOCAL_IONET_PROVIDER_NAME],
+    defaultBaseURL: "https://api.intelligence.io.solutions/api/v1",
+    apiKeyEnv: () => process.env.IONET_API_KEY,
+    baseUrlEnv: () => process.env.IONET_BASE_URL,
     localModelDiscovery: "openai-compatible",
     createCustomModel: true,
   },

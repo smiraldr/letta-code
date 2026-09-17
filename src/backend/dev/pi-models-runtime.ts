@@ -23,6 +23,10 @@ import {
   localProviderApiKeyFromRecord,
 } from "@/backend/local/local-provider-auth-store";
 import {
+  createIonetPiProvider,
+  IONET_PI_PROVIDER_ID,
+} from "./pi-ionet-provider";
+import {
   createLlamaCppPiProvider,
   LLAMA_CPP_PI_PROVIDER_ID,
 } from "./pi-llama-cpp-provider";
@@ -126,6 +130,7 @@ const MANAGED_ENDPOINT_PROVIDERS: ReadonlyMap<
     OPENAI_COMPATIBLE_PI_PROVIDER_ID,
     (input) => createOpenAICompatiblePiProvider(input),
   ],
+  [IONET_PI_PROVIDER_ID, (input) => createIonetPiProvider(input)],
 ]);
 
 function resolveLocalEndpointConnection(
