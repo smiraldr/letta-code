@@ -59,6 +59,8 @@ describe("createIonetPiProvider", () => {
     expect(models[0]?.baseUrl).toBe(IONET_BASE_URL);
     // The OpenAI model-list schema reports no capabilities.
     expect(models[0]?.input).toEqual(["text"]);
+    // io.net does not document the OpenAI `store` field.
+    expect(models[0]?.compat?.supportsStore).toBe(false);
   });
 
   test("authenticates model discovery with the Bearer API key", async () => {

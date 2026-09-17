@@ -16,6 +16,8 @@ const ALIAS_TO_CANONICAL: Record<string, ConnectProviderCanonical> = {
   "openai-codex": "chatgpt",
   ollama: "ollama",
   "ollama-cloud": "ollama-cloud",
+  ionet: "ionet",
+  "io.net": "ionet",
   lmstudio: "lmstudio",
   "llama-cpp": "llama-cpp",
   "llama.cpp": "llama-cpp",

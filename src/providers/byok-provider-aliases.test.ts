@@ -42,6 +42,8 @@ describe("buildByokProviderAliases", () => {
     expect(localAliases["lc-ollama"]).toBe("ollama");
     expect(localAliases["ollama-cloud"]).toBe("ollama-cloud");
     expect(localAliases["lc-ollama-cloud"]).toBe("ollama-cloud");
+    expect(localAliases.ionet).toBe("ionet");
+    expect(localAliases["lc-ionet"]).toBe("ionet");
     expect(localAliases.lmstudio).toBe("lmstudio");
     expect(localAliases["lc-lmstudio"]).toBe("lmstudio");
     expect(localAliases["llama-cpp"]).toBe("llama.cpp");

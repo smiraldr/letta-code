@@ -16,10 +16,14 @@ export interface IonetPiProviderOptions {
 
 const ionetDiscover: LocalEndpointDiscover = async (context) => {
   const list = await context.fetchJson(`${context.openAIBaseURL}/models`);
-  return modelIdsFromOpenAICompatibleList(list).map(
-    (modelId) =>
-      context.lastKnown.get(modelId) ?? context.buildModel({ id: modelId }),
-  );
+  return modelIdsFromOpenAICompatibleList(list).map((modelId) => {
+    const model =
+      context.lastKnown.get(modelId) ?? context.buildModel({ id: modelId });
+    // The io.net reference does not document the OpenAI `store` field
+    // (its supported list covers max_completion_tokens, developer role and
+    // the usual sampling params), so never send it upstream.
+    return { ...model, compat: { ...model.compat, supportsStore: false } };
+  });
 };
 
 /**

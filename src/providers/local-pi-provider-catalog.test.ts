@@ -158,6 +158,7 @@ describe("local pi provider catalog", () => {
       "openai-compatible",
       "lmstudio",
       "llama-cpp",
+      "ionet",
     ]);
 
     for (const spec of PI_PROVIDER_SPECS) {

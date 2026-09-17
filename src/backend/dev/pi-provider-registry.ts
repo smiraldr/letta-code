@@ -338,6 +338,7 @@ const LOCAL_ENDPOINT_PROVIDER_SPECS: readonly PiProviderSpec[] = [
     apiKeyEnv: () => process.env.IONET_API_KEY,
     baseUrlEnv: () => process.env.IONET_BASE_URL,
     localModelDiscovery: "openai-compatible",
+    envConfigured: () => hasEnvValue(process.env.IONET_API_KEY),
     createCustomModel: true,
   },
   {
